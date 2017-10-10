@@ -85,7 +85,7 @@ It is convenient to have ssh access without passwords for both `root` and the us
 
 In the folder `~/.ssh` on your local machine find the file that holds your public key, it may be called something like `id_dsa_pub` or `id_rsa_pub`/ Make sure that this is named correctly in 
 
-	ubuntu/make_inc
+	make_inc
 
 Copy the key contained in this file to the files
 
