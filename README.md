@@ -65,8 +65,10 @@ This is telling you that __yourdomain__ has previously been used but on a differ
 Much of the setup can be accomplished by executing makefiles and shell scripts on your development machine. So
 before going any further clone this repo. And CD to the root of the local copy of the repo.
 
-The file `make_inc` contains parameters for the makefiles and scripts, including user names and password,
-so check that you like the values BEFORE moving on to the rest of the READFME. 
+A file named `make_inc` is required by the various makefiles and scripts as it provides parameters, 
+including user names and password, that customize the installation process. This file should be created
+by you from `make_inc_template` 
+BEFORE moving on to the rest of the READFME. 
 
 ## Users  ##
 Add a user that will be the home of the stringy.io installation. The user needs `sudo` capability, so don't forget to add them to the `/etc/sudoer` file or include them in the `sudo` group. It will help latter if they are also in the `data-www` group.
@@ -98,22 +100,22 @@ This can be done with the command
 
 |Commands|
 |------------------------|
-| ubuntu/ssh/makefile|
+| cd ssh; make; cd .. |
 
 
 ## 3. Installing packages ##
 
 Install the `ubuntu/apt-get` folder as `/home/robert/apt-get` on the server. 
 
-The following command (on your work station) should do it (executed from ubuntu-setup folder)
+The following command (on your work station, from the repo root) should do it 
 
 	rsync -pva apt-get robert@iracoon.com:/home/robert
 	
 |Commands|
 |---------------|
-|ubuntu/apt-get/makefile |
+|cd apt-get; make; cd .. |
 
-will also achieve the transfer.
+will also achieve the same transfer but will use the values specified in `make_inc`.
 	
 Now run the `pkg_install` script on the server.
 
@@ -133,7 +135,11 @@ Check this by running
 	./pkg_versions.sh
 
 This should list all the required packages with version numbers.
-	
+
+## php version ##
+
+Currently php5.6 is installed. Have not had a need or time to update for php 7.0.
+
 ### MYSQL root password ###
 
 The command
@@ -162,7 +168,7 @@ __NOTE__ This is now done by the `pkg_install.sh` script.
 	
 ### Php proctitile extension  ###
 
-NOTE : THIS IS ACTUALLY DONE BY THE pxg_install.sh script
+__NOTE__ : THIS IS ACTUALLY DONE BY THE pxg_install.sh script
 
 Install 	`php-pear` and `php5-dev`
 
