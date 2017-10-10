@@ -60,7 +60,7 @@ Host key verification failed.
 
 This is telling you that __yourdomain__ has previously been used but on a different host. To use __yourdomain__ on the new host you will have to delete that domain from the `know_hosts` file. The message gives the line number. 
 
-##1. Users  ##
+## 1. Users  ##
 Add a user that will be the home of the stringy.io installation. The user needs `sudo` capability, so don't forget to add them to the `/etc/sudoer` file or include them in the `sudo` group. It will help latter if they are also in the `data-www` group.
 
 |__Commands__|
