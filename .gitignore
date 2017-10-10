@@ -1,0 +1,11 @@
+.DS_Store
+*.orig
+*.log
+log
+*.sublime-workspace
+**/.idea
+**/node_modules
+**/bower_components
+**/vendor
+docs/public/php
+docs/public/php/

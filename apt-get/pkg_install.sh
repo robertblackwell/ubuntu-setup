@@ -54,6 +54,7 @@ if [ "$1" = "uninstall" ] ; then
     rm -vf /usr/local/bin/composer/composer.phar 
     rm -vf /usr/local/bin/resque_cmd.phar
 	rm -Rvf /home/robert/php-resque-cmd
+	npm uninstall gulp
 	
 else
     ##########################################################################################
@@ -74,6 +75,7 @@ else
     install_mysql
     install_composer
 	install_resque_cmd
+	install_gulp
 
     hash -r
     apt-get install -f

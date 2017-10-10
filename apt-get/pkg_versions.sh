@@ -23,3 +23,9 @@
     echo "NODE VERSION"
     nodejs -v
     echo "*********************"
+    echo "NPM VERSION"
+    npm --version
+    echo "*********************"
+    echo "GULP VERSION"
+    gulp --version
+    echo "*********************"

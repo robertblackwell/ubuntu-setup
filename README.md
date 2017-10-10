@@ -1,7 +1,5 @@
 # ubuntu
-Tools for configuring a Ubuntu server
-
-# Setting up and Ubuntu 14.04.2 (VPS) server #
+Tools for configuring a Ubuntu 14.04.2 (VPS) server #
 
 
 This note is intended to assist in setting up a Unbuntu Virtual Private Server.
@@ -11,9 +9,9 @@ The details are derived from my efforts to set up a personal __mediatemple__ ser
 However since the domain __stringy.io__ is already in use I must use a different
 domain for this server and for accessing the __stringy.io__ applications.
 
-I have chosen __iracoon.com__ as the domain for my efforts.   
+I have chosen __iracoon.com__ as the domain for both th server and the implementation of the stringy.io app.   
 
-The starting point for this effort is a server running `Ubuntu 14.04.2 LTS (Trusty Tahr)` for which you have ssh access as root.
+The __starting point__ for this effort is a server running `Ubuntu 14.04.2 LTS (Trusty Tahr)` for which you have ssh access as root.
 
 The notes below we made during the process in the hope of reminding me what I did.
 
@@ -92,7 +90,7 @@ on the server with a command like
 
 	cat ~/.ssh/id_dsa.pub | ssh user@remotehost 'cat >> ~/.ssh/authorized_keys'
 	
-Tis can be done with the command 
+This can be done with the command 
 
 |Commands|
 |------------------------|
@@ -101,11 +99,11 @@ Tis can be done with the command
 
 ## 3. Installing packages ##
 
-Install the `ubuntu/apt-get` folder as `/home/robert/apt-get` fon the server. 
+Install the `ubuntu/apt-get` folder as `/home/robert/apt-get` on the server. 
 
-The following command (on your work station) should do it
+The following command (on your work station) should do it (executed from ubuntu-setup folder)
 
-	rsync -pva provisioning robert@iracoon.com:/home/robert
+	rsync -pva apt-get robert@iracoon.com:/home/robert
 	
 |Commands|
 |---------------|
@@ -159,6 +157,8 @@ Then `sudo kill -9` the mysql process you started.
 __NOTE__ This is now done by the `pkg_install.sh` script.
 	
 ### Php proctitile extension  ###
+
+NOTE : THIS IS ACTUALLY DONE BY THE pxg_install.sh script
 
 Install 	`php-pear` and `php5-dev`
 

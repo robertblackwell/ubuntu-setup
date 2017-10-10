@@ -279,6 +279,31 @@ install_php(){
         return
     fi
 }
+######################################################################################
+#
+# install php 7.0
+#
+######################################################################################
+install_php7.0(){
+    
+    if [[ ${trace} -eq 1 ]] 
+    then 
+        install_banner "$FUNCNAME[0]" 
+        return
+    fi
+    
+    pkg_test_exists "^ii  php5 .*5\.6" 
+    if [ "$?" -eq "0" ]; then
+        allready_installed_banner "php5.6"
+    else
+        install_banner php5.6
+        add-apt-repository ppa:ondrej/php5-5.6 -y     
+        apt-get update 
+        apt-get upgrade 
+        apt-get install php5
+        return
+    fi
+}
 
 ######################################################################################
 #
@@ -432,3 +457,28 @@ install_mysql()
 
     fi
 }
+
+######################################################################################
+#
+# install gulp
+#
+######################################################################################
+install_gulp()
+{
+
+    if [[ ${trace} -eq 1 ]] 
+    then 
+        install_banner "$FUNCNAME[0]" 
+        return
+    fi
+    
+	which gulp
+    if [ "$?" -eq "0" ]; then
+        allready_installed_banner gulp
+    else
+        install_banner gulp
+		npm install --global gulp
+
+    fi
+}
+

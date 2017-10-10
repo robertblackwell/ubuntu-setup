@@ -1,7 +1,7 @@
 LOCALUSER=rob
-
+KEYFILE=id_rsa
 DOMAIN=iracoon.com
 ROOT=root
-ROOTPW='Wara)(12'
+ROOTPW='Edmond_170449'
 USER=robert
-USERPW='Wara)(12'
+USERPW='Edmond_170449'
