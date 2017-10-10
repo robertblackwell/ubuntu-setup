@@ -1,0 +1,10 @@
+LOCALUSER=
+KEYFILE=id_rsa
+
+DOMAIN=iracoon.com
+ROOT=root
+#put the root password in here
+ROOTPW='....'
+USER=robert
+## put the passowrd for you user in here and if you want change the user name
+USERPW='...'

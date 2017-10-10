@@ -60,12 +60,22 @@ Host key verification failed.
 
 This is telling you that __yourdomain__ has previously been used but on a different host. To use __yourdomain__ on the new host you will have to delete that domain from the `know_hosts` file. The message gives the line number. 
 
-## 1. Users  ##
+## Clone this repository ##
+
+Much of the setup can be accomplished by executing makefiles and shell scripts on your development machine. So
+before going any further clone this repo. And CD to the root of the local copy of the repo.
+
+The file `make_inc` contains parameters for the makefiles and scripts, including user names and password,
+so check that you like the values BEFORE moving on to the rest of the READFME. 
+
+## Users  ##
 Add a user that will be the home of the stringy.io installation. The user needs `sudo` capability, so don't forget to add them to the `/etc/sudoer` file or include them in the `sudo` group. It will help latter if they are also in the `data-www` group.
+
+Do this by issuing the following command on your development machine
 
 |__Commands__|
 |-----------------------------|
-| ubuntu/users/makefile|
+| ./users/makefile|
 
 ## 2.SSH Without passwords  ##
 
