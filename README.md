@@ -15,13 +15,7 @@ The __starting point__ for this effort is a server running `Ubuntu 14.04.2 LTS (
 
 The notes below we made during the process in the hope of reminding me what I did.
 
-Since writing these I have automated much of the process in a series of makefiles
-that can be found in the github repository `robertblackwell/ubuntu14`.
-
-To get started with these makefiles clone the repository to your development machine. 
-
-In each of the steps below I give some explanation of what is going on plus a list of commands to be issued (either on your development machine or the server)
-to use the makefiles.
+In each of the steps below I give some explanation of what is going on plus a list of commands to be issued (either on your development machine or the server).
 
 Before getting started here are two topics that need be covered to help you get to the point where a __mediatemple__ server meets our starting point requirements.
 
