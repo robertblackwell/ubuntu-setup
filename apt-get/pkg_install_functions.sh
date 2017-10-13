@@ -72,6 +72,56 @@ allready_installed_banner(){
     return
 
 }
+######################################################################################
+#
+# install apt-get-common
+#
+######################################################################################
+install_software_properties(){
+    
+    if [[ ${trace} -eq 1 ]] 
+    then 
+        install_banner "$FUNCNAME[0]" 
+        return
+    fi
+    
+    which apt-add-repository &> /dev/null
+    if [ "$?" -eq "0" ]; then
+        
+        allready_installed_banner "software"
+
+    else
+        install_banner software-properties
+        apt-get update 
+        apt-get upgrade 
+        apt-get install software-properties-common
+    fi
+}
+######################################################################################
+#
+# install curl
+#
+######################################################################################
+install_curl(){
+    
+    if [[ ${trace} -eq 1 ]] 
+    then 
+        install_banner "$FUNCNAME[0]" 
+        return
+    fi
+    
+    which curl &> /dev/null
+    if [ "$?" -eq "0" ]; then
+        
+        allready_installed_banner "curl"
+
+    else
+        install_banner curl
+        apt-get update 
+        apt-get upgrade 
+        apt-get install curl
+    fi
+}
 
 ######################################################################################
 #
@@ -214,15 +264,15 @@ install_ruby(){
         return
     fi
       
-    pkg_test_exists "^ii  ruby" 
+    pkg_test_exists "^ii  ruby2.2" 
     if [ "$?" -eq "0" ]; then
         allready_installed_banner "ruby2.2"
     else
-        install_banner ruby2.2
-        apt-add-repository ppa:brightbox/ruby-ng
+        install_banner ruby
+        apt-add-repository ppa:brightbox/ruby-ng-experimental
         apt-get update 
         apt-get upgrade 
-        apt-get install ruby2.2
+        apt-get install -y ruby2.2 ruby2.2-dev ruby2.2-doc
         return
     fi
 }
@@ -239,12 +289,13 @@ install_nodejs(){
         return
     fi
     
-    pkg_test_exists "^ii  nodejs" 
+    node -v | grep "v6\.11" &> /dev/null    
     if [ "$?" -eq "0" ]; then
         allready_installed_banner "nodejs"
     else
         install_banner nodejs
-        curl -sL https://deb.nodesource.com/setup_${node_version} | sudo bash -
+        # curl -sL https://deb.nodesource.com/setup_${node_version} | sudo bash -
+        curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
         apt-get update 
         apt-get upgrade 
         apt-get install nodejs
@@ -267,7 +318,7 @@ install_php(){
         return
     fi
     
-    pkg_test_exists "^ii  php5 .*5\.6" 
+    pkg_test_exists "^ii  php5.6" 
     if [ "$?" -eq "0" ]; then
         allready_installed_banner "php5.6"
     else
@@ -275,7 +326,7 @@ install_php(){
         add-apt-repository ppa:ondrej/php5-5.6 -y     
         apt-get update 
         apt-get upgrade 
-        apt-get install php5
+        apt-get install php5.6
         return
     fi
 }
@@ -297,10 +348,11 @@ install_php7.0(){
         allready_installed_banner "php5.6"
     else
         install_banner php5.6
-        add-apt-repository ppa:ondrej/php5-5.6 -y     
+        add-apt-repository ppa:ondrej/php -y     
         apt-get update 
         apt-get upgrade 
-        apt-get install php5
+        apt-get install php7.0
+        apt-get install php7.0-fpm
         return
     fi
 }

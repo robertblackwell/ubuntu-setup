@@ -7,9 +7,11 @@ $mode = (isset($argv[1])) ? $argv[1] : "local";
 $subdomain = (isset($argv[2])) ? $argv[2] : "api"; 
 $domain = (isset($argv[3])) ? $argv[3] : "stringy.io";
 
-mkDocsConfFile($mode, $subdomain, $domain);
+$defaultFastCgiPass = "unix:/run/php/php5.6-fpm.sock";
 
-function mkDocsConfFile($mode, $subdomain, $domain)
+mkDocsConfFile($mode, $subdomain, $domain, $defaultFastCgiPass);
+
+function mkDocsConfFile($mode, $subdomain, $domain, $fastCgiPass)
 {
 //    print "Making nginx conf files for $mode.$subdomain.$domain \n";
 
@@ -17,15 +19,16 @@ function mkDocsConfFile($mode, $subdomain, $domain)
 
     $outputFileName = realpath(__DIR__."/../sites-available")."/stringy.$subdomain.$mode.autogen.conf";
 
-
-//     print "TEMPLATE: ".$templateFileName . "\n"; 
-//     print "OUPTUTFILE: ".$outputFileName . "\n"; 
+    // print "TEMPLATE: ".$templateFileName . "\n"; 
+    // print "OUPTUTFILE: ".$outputFileName . "\n"; 
 
     $templateString = file_get_contents($templateFileName);
 
     $config = doConfig($mode, $subdomain, $domain);
+    
+    $s0 = str_replace('${FASTCGI_PASS}', $fastCgiPass, $templateString);
 
-    $s1 = str_replace('${SERVER_NAMES}',$config->serverNames, $templateString);
+    $s1 = str_replace('${SERVER_NAMES}',$config->serverNames, $s0);
     
     $s2 = str_replace('${ACCESS_LOG}',$config->accessLog, $s1);
     $s3 = str_replace('${ERROR_LOG}',$config->errorLog, $s2);
@@ -40,6 +43,8 @@ function mkDocsConfFile($mode, $subdomain, $domain)
     else
         $s4 = str_replace('${DOCUMENT_ROOT}',$config->docRoot, $s3);
 
+    // print $templateString;
+    // print "\n====================================\n";
     print $s4;
 }
 

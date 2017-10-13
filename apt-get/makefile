@@ -10,7 +10,7 @@ TARGETDIR=apt-get
 PWD=$(shell pwd)
 
 deploy:
-	rsync -artvp $(PWD) $(USER)@$(DOMAIN):/home/$(USER)/$(TARGETDIR)/
+	rsync -artvp $(PWD) $(USER)@$(DOMAIN):/home/$(USER) #/$(TARGETDIR)/
 	@echo ""
 	@echo "###########################################################"	
 	@echo ""

@@ -33,7 +33,7 @@ clean:
 confs_all:
 	test -d ./sites/$(DOMAIN) || mkdir -p ./sites/$(DOMAIN)
 	cp -R templates/supervisor.conf ./sites/$(DOMAIN)
-	make conf DOMAIN=$(DOMAIN) MODE=api
+	make conf DOMAIN=$(DOMAIN) MODE=stg
 	make conf DOMAIN=$(DOMAIN) MODE=local
 	make conf DOMAIN=$(DOMAIN) MODE=live
 

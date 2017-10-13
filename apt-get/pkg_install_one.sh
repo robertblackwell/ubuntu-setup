@@ -4,16 +4,15 @@
 #
 # PACKAGE install uninstall
 #
-# This script installs or uninstalls the apt-get packages required
-# by the string.io system
-#
+# This script allows execution of one of the functions in
+# pkg_install_functions.sh
 # Usage:
 #   
 #   to install packages just type 
-#       sudo bootstrap.sh
+#       pkg_install_one.sh install <function name>
 #
 #   to uninstall type
-#       sudo bootstrap.sh uninstall
+#       pkg_one.sh uninstall <function_name>
 #
 ##########################################################################################
 MYDIR=`cd "$(dirname "$0")" && pwd`
@@ -33,6 +32,7 @@ ruby_version=ruby2.2
 php_version=php5-5.6
 mysql_version=mysql-server-5.5
 
+
 if [ "$1" = "uninstall" ] ; then
 
     ##########################################################################################
@@ -40,7 +40,6 @@ if [ "$1" = "uninstall" ] ; then
     # UNINSTALL packages
     #
     ##########################################################################################
-    apt-get autoremove curl  
     apt-get autoremove git  
     apt-get autoremove nginx
     apt-get autoremove realpath
@@ -51,34 +50,36 @@ if [ "$1" = "uninstall" ] ; then
     
     apt-get autoremove mysql-server-5.5
     apt-get autoremove debconf-utils
-    
-    rm -vf /usr/local/bin/composer/composer.phar 
-    rm -vf /usr/local/bin/resque_cmd.phar
-	rm -Rvf /home/robert/php-resque-cmd
-	npm uninstall gulp
-	
+    if [ "$2" = "composer"]; then
+        rm -vf /usr/local/bin/composer/composer.phar
+    elif [ "$2" = "resque"]; then
+        rm -vf /usr/local/bin/resque_cmd.phar
+        rm -Rvf /home/robert/php-resque-cmd
+    elif [ "$2" = "gulp"]; then
+        npm uninstall gulp
+    else
+        apt-get autoremove $2
+    fi
 else
     ##########################################################################################
     #
     # INSTALL packages
     #
     ##########################################################################################
-    install_software_properties
-    install_curl
     install_git
     install_nginx
     install_realpath
     install_redis_server
     install_supervisor
     install_ruby
-    install_nodejs
+    install_nodejs    
     install_php
     install_php_extensions
     install_proctitle
     install_mysql
     install_composer
-	install_resque_cmd
-	install_gulp
+    install_resque_cmd
+    install_gulp
 
     hash -r
     apt-get install -f
