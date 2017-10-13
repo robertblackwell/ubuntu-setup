@@ -79,7 +79,7 @@ Do this by issuing the following command on your development machine
 |-----------------------------|
 | ./users/makefile|
 
-## 2.SSH Without passwords  ##
+## 2. SSH Without passwords  ##
 
 It is convenient to have ssh access without passwords for both `root` and the user you added above.
 
@@ -214,12 +214,20 @@ file in the directory
 
 	/usr/share/nginx/html	
 
-### nginx configuration ###
+## 3. nginx configuration ###
+
+### note 1 - todo
+
+Use an include file for the socket/port that connects php-fpm and nginx so that it is not repeated in each config file.
+	
+### note 2
 
 Note on ubuntu `nginx` and `php5.6-fpm` are started, stopped and restarted with the following commands
 
 	sudo /etc/init.d/nginx start|stop|restarted
 	sudo /etc/init.d/php5.6-fpm start|stop|restart
+
+### back to config
 
 Configuration of nginx for the stringy app is best done with the help of scripts and files inside the folder
 
@@ -257,7 +265,7 @@ live.docs.iracoon.com | com.iracoon.docs.live.conf
 live.api.iracoon.com | com.iracoon.api.live.conf
 iracoon.com | com.iracoon.live.conf
 
-#### Generate nginx config files from templates
+### Generate nginx config files from templates
 
 These conf files can be generated (on your development machine) by the following commands
 
@@ -268,7 +276,7 @@ which deposits the conf files in the sub-folder
 
 	nginx-config/sites/iracoon.com
 	
-#### Deploy the generated config files to server's 'sites-available' folder
+### Deploy the generated config files to server's 'sites-available' folder
 
 To transfer the config files to the iracoon.com server with the command
 
@@ -285,7 +293,7 @@ folder on the server. These links are most easily created using remote commands 
 
 
 
-###  Stringy API setup ###
+## 4. Stringy API setup ###
 
 -	The makefile in `Stringy/api` has an option `make deploy_iracoon_stg` which will send all api related files to the correct folder on the `iracoon` server.
 
@@ -315,7 +323,7 @@ folder on the server. These links are most easily created using remote commands 
 		make db_all MODE=stg
 
 	
-## Hooking up Php-Resque for background processing ##
+## 5. Hooking up Php-Resque for background processing ##
 
 The Stingy Api requires a background processing capability which is provided by a fork of `chrisboulton/php-resque`.
 
@@ -332,7 +340,7 @@ Resque worker processes are invoked via shell scripts
 	/home/robert/www/stg.iracoon.com/api/bin/start_worker_stg.sh 
 	/home/robert/www/stg.iracoon.com/live/bin/start_worker_live.sh 
 
-## Front end
+## 6. Front end
 
 To run the frontend of this app some more stuff has to be done and I have not packaged that. This is the quick and dirty way of doing it.
 
@@ -365,4 +373,4 @@ On the server we need to start the dev server on port 3330
 
 Go to a browser and enter the URL
 
-	http://stg.iracoon.como
+	http://stg.iracoon.com
